@@ -1,0 +1,22 @@
+{
+  "overview": "uMucyo BookingServices is a single-provider service booking app for Mucyo Answer in Nyagatare, Rwanda. Customers browse and book from a diverse range of local services including cleaning, hair salon, plumbing, tailoring, car wash, catering, and more — without needing an account.",
+  "features": [
+    "Browse diverse Rwanda-relevant services",
+    "Book appointments without creating an account",
+    "About Us page with business mission",
+    "Contact Us page with Mucyo Answer details",
+    "Provider dashboard to manage services and availability",
+    "Booking confirmation flow",
+    "Admin login with Internet Identity"
+  ],
+  "category": "productivity",
+  "tags": [
+    "booking",
+    "rwanda",
+    "services",
+    "appointments",
+    "nyagatare",
+    "local-services"
+  ],
+  "last_updated": "2026-05-05T07:54:51.303Z"
+}

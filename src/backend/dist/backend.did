@@ -1,0 +1,101 @@
+type WeeklyAvailability = vec DayAvailability;
+type UpdateServiceRequest = 
+ record {
+   description: text;
+   durationMinutes: nat;
+   id: ServiceId;
+   name: text;
+   price: text;
+ };
+type Timestamp = int;
+type TimeStr = text;
+type TimeSlot = 
+ record {
+   isAvailable: bool;
+   startTime: TimeStr;
+ };
+type TimeRange = 
+ record {
+   endTime: TimeStr;
+   startTime: TimeStr;
+ };
+type ServiceId = nat;
+type Service = 
+ record {
+   description: text;
+   durationMinutes: nat;
+   id: ServiceId;
+   isActive: bool;
+   name: text;
+   price: text;
+ };
+type DayOfWeek = 
+ variant {
+   friday;
+   monday;
+   saturday;
+   sunday;
+   thursday;
+   tuesday;
+   wednesday;
+ };
+type DayAvailability = 
+ record {
+   day: DayOfWeek;
+   ranges: vec TimeRange;
+ };
+type DateStr = text;
+type CreateServiceRequest = 
+ record {
+   description: text;
+   durationMinutes: nat;
+   name: text;
+   price: text;
+ };
+type CreateBookingRequest = 
+ record {
+   customerEmail: text;
+   customerName: text;
+   date: DateStr;
+   serviceId: ServiceId;
+   timeSlot: TimeStr;
+ };
+type BookingStatus = 
+ variant {
+   cancelled;
+   completed;
+   confirmed;
+   pending;
+ };
+type BookingId = nat;
+type Booking = 
+ record {
+   createdAt: Timestamp;
+   customerEmail: text;
+   customerName: text;
+   date: DateStr;
+   id: BookingId;
+   serviceId: ServiceId;
+   status: BookingStatus;
+   timeSlot: TimeStr;
+ };
+service : {
+  cancelBooking: (id: BookingId) -> (bool);
+  createBooking: (req: CreateBookingRequest) -> (BookingId);
+  createService: (req: CreateServiceRequest) -> (Service);
+  deleteService: (id: ServiceId) -> (bool);
+  getAdmin: () -> (opt principal) query;
+  getAvailability: () -> (WeeklyAvailability) query;
+  getAvailableSlots: (serviceId: ServiceId, date: DateStr) ->
+   (vec TimeSlot) query;
+  getBooking: (id: BookingId) -> (opt Booking) query;
+  getService: (id: ServiceId) -> (opt Service) query;
+  listBookings: () -> (vec Booking);
+  listPastBookings: () -> (vec Booking);
+  listServices: () -> (vec Service) query;
+  listUpcomingBookings: () -> (vec Booking);
+  setAdmin: () -> ();
+  setAvailability: (schedule: WeeklyAvailability) -> ();
+  updateBookingStatus: (id: BookingId, status: BookingStatus) -> (bool);
+  updateService: (req: UpdateServiceRequest) -> (bool);
+}

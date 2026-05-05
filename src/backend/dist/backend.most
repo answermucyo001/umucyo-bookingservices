@@ -1,0 +1,62 @@
+// Version: 1.0.0
+type BookingId__572944220 = Nat;
+type BookingStatus__866642965 =
+  {#cancelled; #completed; #confirmed; #pending};
+type Booking__1057793126 =
+  {
+    createdAt : Timestamp__301639476;
+    customerEmail : Text;
+    customerName : Text;
+    date : DateStr__328324513;
+    id : BookingId__572944220;
+    serviceId : ServiceId__271116140;
+    status : BookingStatus__866642965;
+    timeSlot : TimeStr__185731678
+  };
+type DateStr__328324513 = Text;
+type DayAvailability__938244436 =
+  {day : DayOfWeek__791624275; ranges : [TimeRange__910869665]};
+type DayOfWeek__791624275 =
+  {#friday; #monday; #saturday; #sunday; #thursday; #tuesday; #wednesday};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ServiceId__271116140 = Nat;
+type Service__980514341 =
+  {
+    description : Text;
+    durationMinutes : Nat;
+    id : ServiceId__271116140;
+    isActive : Bool;
+    name : Text;
+    price : Text
+  };
+type TimeRange__910869665 =
+  {endTime : TimeStr__185731678; startTime : TimeStr__185731678};
+type TimeStr__185731678 = Text;
+type Timestamp__301639476 = Int;
+actor {
+  stable adminPrincipal : {var value : ?Principal};
+  stable var adminPrincipalValue : ?Principal;
+  stable availability :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?DayAvailability__938244436]];
+      var elementIndex : Nat__490723111
+    };
+  stable bookings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Booking__1057793126]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextBookingId : {var value : Nat};
+  stable var nextBookingIdValue : Nat;
+  stable nextServiceId : {var value : Nat};
+  stable var nextServiceIdValue : Nat;
+  stable services :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Service__980514341]];
+      var elementIndex : Nat__490723111
+    }
+};
